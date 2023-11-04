@@ -5,17 +5,15 @@
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
-  "module": "dist/esm/index.js",
+  "module": "dist/cjs/index.js",
+  "main": "dist/esm/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && npm run build:js && npm run build:types",
-    "build:js": "rollup -c",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist",
-    "lint:fix": "eslint --fix src/**/*.{js,ts,jsx,tsx}",
+    "start": "rollup -c -w",
+    "build": "rm -rf dist && rollup -c",
+    "lint": "eslint --fix src/**/*.{js,ts,jsx,tsx}",
     "prettier": "prettier --write src/**/* ./*.{json,*.json} !package-lock.json -u --no-error-on-unmatched-pattern",
-    "format": "npm run prettier && npm run lint:fix"
+    "format": "npm run prettier && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -53,6 +51,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "rollup-plugin-dts": "^6.1.0",
+    "rollup-plugin-node-polyfills": "^0.2.1",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.36.0",
@@ -61,6 +60,7 @@
   },
   "peerDependencies": {
     "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react-dom": "^17.0.2",
+    "recharts": "^2.9.0"
   }
 }
