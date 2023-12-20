@@ -5,17 +5,15 @@
   "files": [
     "dist"
   ],
-  "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
+  "main": "dist/cjs/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "clean": "rm -rf dist",
-    "build": "npm run clean && npm run build:js && npm run build:types",
-    "build:js": "rollup -c",
-    "build:types": "tsc --emitDeclarationOnly --outDir dist",
-    "lint:fix": "eslint --fix src/**/*.{js,ts,jsx,tsx}",
+    "start": "rollup -c -w",
+    "build": "rm -rf dist && rollup -c",
+    "lint": "eslint --fix src/**/*.{js,ts,jsx,tsx}",
     "prettier": "prettier --write src/**/* ./*.{json,*.json} !package-lock.json -u --no-error-on-unmatched-pattern",
-    "format": "npm run prettier && npm run lint:fix"
+    "format": "npm run prettier && npm run lint"
   },
   "repository": {
     "type": "git",
@@ -33,6 +31,7 @@
   },
   "homepage": "https://github.com/PeachMood/geochart#readme",
   "devDependencies": {
+    "@rollup/plugin-alias": "^5.0.1",
     "@rollup/plugin-commonjs": "^25.0.7",
     "@rollup/plugin-node-resolve": "^15.2.3",
     "@rollup/plugin-typescript": "^11.1.5",
@@ -62,5 +61,17 @@
   "peerDependencies": {
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
+  },
+  "dependencies": {
+    "@visx/axis": "^3.5.0",
+    "@visx/curve": "^3.3.0",
+    "@visx/grid": "^3.5.0",
+    "@visx/group": "^3.3.0",
+    "@visx/responsive": "^3.3.0",
+    "@visx/scale": "^3.5.0",
+    "@visx/shape": "^3.5.0",
+    "@visx/text": "^3.3.0",
+    "classnames": "^2.3.2",
+    "victory": "^36.6.12"
   }
 }

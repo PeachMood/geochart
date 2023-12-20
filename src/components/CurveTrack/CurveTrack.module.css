@@ -1,0 +1,7 @@
+.track {
+  display: flex;
+  gap: 20px;
+  background-color: white;
+  padding: 5px 0;
+  border-top: 3px solid #e6e9ec;
+}
