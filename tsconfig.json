@@ -15,9 +15,14 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": false,
-    "baseUrl": "src",
     "outDir": "dist",
-    "declaration": true
+    "declaration": true,
+    "baseUrl": "src",
+    "paths": {
+      "components/*": ["components/*"],
+      "contex/*": ["contex/*"],
+      "utils/*": ["utils/*"]
+    }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],
   "exclude": ["node_modules", "dist"]

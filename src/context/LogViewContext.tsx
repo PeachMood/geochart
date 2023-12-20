@@ -1,11 +1,9 @@
 import { createContext } from 'react';
 
-import ILogView from '../types/ILogView';
+import { type LogView } from 'utils/types';
 
-export interface ILogViewContext {
-  logView: ILogView | undefined;
-}
+export type LogViewContext = LogView;
 
-const LogViewContext = createContext<ILogViewContext | null>(null);
+const LogViewContext = createContext<LogViewContext>({} as LogViewContext);
 
 export default LogViewContext;

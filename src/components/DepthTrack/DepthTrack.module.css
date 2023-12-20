@@ -1,0 +1,6 @@
+.track {
+  display: flex;
+  gap: 20px;
+  background-color: white;
+  border-top: 3px solid #e6e9ec;
+}

@@ -1,0 +1,12 @@
+.label {
+  font-size: 16px;
+  font-weight: 600;
+  font-family: sans-serif;
+  text-anchor: middle;
+}
+
+.tick {
+  font-size: 12px;
+  font-weight: 600;
+  font-family: sans-serif;
+}

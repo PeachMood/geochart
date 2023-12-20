@@ -3,7 +3,7 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
-import nodePolyfills from 'rollup-plugin-node-polyfills';
+import alias from '@rollup/plugin-alias';
 import { dts } from 'rollup-plugin-dts';
 
 import packageJson from './package.json' assert {type: 'json'};
@@ -30,7 +30,6 @@ export default [
     ],
     plugins: [
       peerDepsExternal(),
-      nodePolyfills(),
       nodeResolve({ extensions, browser: true }),
       commonjs(),
       typescript({ tsconfig: './tsconfig.json' }),
@@ -41,6 +40,13 @@ export default [
     input: 'dist/esm/index.d.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
     external: [/\.css$/],
-    plugins: [dts()],
+    plugins: [
+      alias({
+        entries: [
+          { find: 'utils', replacement: '../../utils' },
+        ]
+      }),
+      dts()
+    ]
   },
 ];
