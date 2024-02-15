@@ -39,66 +39,66 @@ import { LogView, Curve, CurveTrack, DepthTrack } from 'geochart';
 ```
 ### Example
 1. Place the LogView component in the beginning - this is the workspace for plotting. Then pass the depth data to the component and other parameters at your choice
-```JavaScript
-function App() {
-  return (
-    <div className="page">
-      <div className="container">
-        <LogView depth={depth} orientation="horizontal">
-        </LogView>
-      </div>
-    </div>
-  );
-}
-```
+    ```JavaScript
+    function App() {
+      return (
+        <div className="page">
+          <div className="container">
+            <LogView depth={depth} orientation="horizontal">
+            </LogView>
+          </div>
+        </div>
+      );
+    }
+    ```
 2. Now place the CurveTrack as a child element - this is a component for grouping graphs. Set the parameters you need
-```JavaScript
-function App() {
-  return (
-    <div className="page">
-      <div className="container">
-        <LogView depth={depth} orientation="horizontal">
-          <CurveTrack></CurveTrack>
-        </LogView>
-      </div>
-    </div>
-  );
-}
-```
+    ```JavaScript
+    function App() {
+      return (
+        <div className="page">
+          <div className="container">
+            <LogView depth={depth} orientation="horizontal">
+              <CurveTrack></CurveTrack>
+            </LogView>
+          </div>
+        </div>
+      );
+    }
+    ```
 3. Finally, add curves: specify the data, name (must be unique for track), color, range and so on
-```JavaScript
-function App() {
-  return (
-    <div className="page">
-      <div className="container">
-        <LogView depth={depth} orientation="horizontal">
-          <CurveTrack>
-            <Curve name="ROP AVG" data={ropAvg} style={{ color: '#B80C09' }} />
-            <Curve name="ACTECDX" data={actecdx} style={{ color: '#FBBB3B' }} />
-          </CurveTrack>
-        </LogView>
-      </div>
-    </div>
-  );
-}
-```
+    ```JavaScript
+    function App() {
+      return (
+        <div className="page">
+          <div className="container">
+            <LogView depth={depth} orientation="horizontal">
+              <CurveTrack>
+                <Curve name="ROP AVG" data={ropAvg} style={{ color: '#B80C09' }} />
+                <Curve name="ACTECDX" data={actecdx} style={{ color: '#FBBB3B' }} />
+              </CurveTrack>
+            </LogView>
+          </div>
+        </div>
+      );
+    }
+    ```
 4. Don't forget to add DepthTrack
-```JavaScript
-function App() {
-  return (
-    <div className="page">
-      <div className="container">
-        <LogView depth={depth} orientation="horizontal">
-          <CurveTrack>
-            <Curve name="ROP AVG" data={ropAvg} style={{ color: '#B80C09' }} />
-            <Curve name="ACTECDX" data={actecdx} style={{ color: '#FBBB3B' }} />
-          </CurveTrack>
-          <DepthTrack main={{ name: 'MD', color: '#021D38' }} />
-        </LogView>
-      </div>
-    </div>
-  );
-}
-```
+    ```JavaScript
+    function App() {
+      return (
+        <div className="page">
+          <div className="container">
+            <LogView depth={depth} orientation="horizontal">
+              <CurveTrack>
+                <Curve name="ROP AVG" data={ropAvg} style={{ color: '#B80C09' }} />
+                <Curve name="ACTECDX" data={actecdx} style={{ color: '#FBBB3B' }} />
+              </CurveTrack>
+              <DepthTrack main={{ name: 'MD', color: '#021D38' }} />
+            </LogView>
+          </div>
+        </div>
+      );
+    }
+    ```
 5. It will work out something like the following
 ![image](https://github.com/PeachMood/geochart/assets/71270552/082922ad-d5af-4fc9-9a56-592fc410c34b)
