@@ -1,12 +1,13 @@
 import { createContext } from 'react';
 
-import { type Scale } from 'utils/types';
+import { type Scale } from 'types';
 
 export interface CurveTrackContext {
   key: string;
-  scale: Scale;
   width: number;
   height: number;
+  scale: Scale;
+  lines?: number;
 }
 
 const CurveTrackContext = createContext<CurveTrackContext>({} as CurveTrackContext);

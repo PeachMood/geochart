@@ -1,0 +1,11 @@
+.text {
+  font-size: 12px;
+  font-weight: normal;
+  font-family: sans-serif;
+  text-anchor: middle;
+}
+
+.rotated {
+  transform: rotate(-90deg);
+  transform-origin: 50% 50%;
+}
