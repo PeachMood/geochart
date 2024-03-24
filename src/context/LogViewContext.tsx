@@ -1,8 +1,17 @@
 import { createContext } from 'react';
 
-import { type LogView } from 'utils/types';
+import { type Ticks, type Domain, type Orientation, type VerticalGrid, type Units } from 'types';
 
-export type LogViewContext = LogView;
+export interface LogViewContext {
+  width: number;
+  height: number;
+  orientation: Orientation;
+  domain: Required<Domain>;
+  scope: number;
+  units: Units;
+  grid: VerticalGrid;
+  depth: Ticks;
+}
 
 const LogViewContext = createContext<LogViewContext>({} as LogViewContext);
 

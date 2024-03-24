@@ -21,7 +21,7 @@
     "paths": {
       "components/*": ["components/*"],
       "contex/*": ["contex/*"],
-      "utils/*": ["utils/*"]
+      "hooks/*": ["hooks/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.tsx"],

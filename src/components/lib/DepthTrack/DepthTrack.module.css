@@ -1,0 +1,6 @@
+.track {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-top: 3px solid #e6e9ec;
+}
