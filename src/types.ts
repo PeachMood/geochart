@@ -1,8 +1,8 @@
 import { type FC, type ReactNode } from 'react';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
-
 export type Component<T> = FC<T & { className?: string; children?: ReactNode }>;
+export type Comparator<T> = (a: T, b: T) => number;
 
 export type Scale = 'linear' | 'logarithmic';
 export type Orientation = 'horizontal' | 'vertical';
@@ -18,11 +18,17 @@ export type Data = DataValue[];
 export type DepthValue = number;
 export type Depth = DepthValue[];
 
-export interface CurveValue {
-  x: DepthValue;
-  y: DataValue;
-}
+export type CurveValue = Point<DepthValue, DataValue>;
 export type CurveData = CurveValue[];
+
+export interface Point<X, Y> {
+  x: X;
+  y: Y;
+}
+
+export interface Vector extends Point<number, number> {
+  phi: number;
+}
 
 export interface Text {
   value?: string;
@@ -35,17 +41,14 @@ export interface Size {
 }
 
 export interface Domain {
-  min?: number;
-  max?: number;
+  min: number;
+  max: number;
 }
 
-export interface Range {
-  start?: number;
-  end?: number;
-}
+export type Range<T = number> = T[];
 
 export interface Ticks {
-  domain: Required<Domain>;
+  domain: Domain;
   interval?: number;
   lines?: number;
 }
@@ -80,57 +83,36 @@ export interface HorizontalGrid {
   };
 }
 
-export interface LogViewProps {
-  name: string;
-  scope: number;
-  orientation: Orientation;
-  units: Units;
-  domain: Domain;
-  depth: Depth;
-  grid: VerticalGrid;
-}
-
-export interface CurveTrackProps {
-  name: string;
-  height: number;
-  scale: Scale;
-  grid: HorizontalGrid;
-}
-
-export interface CurveProps {
-  name: string;
-  data: Data;
-  style: LineStyle;
-  domain: Domain;
-  isContinuous: boolean;
-}
-
-export interface AxisProps {
-  key: string;
-  name: string;
-  height: number;
-  scale: Scale;
-  color?: Color;
-  ticks: Ticks;
-}
-
 export interface DepthCurve {
   name?: string;
   color?: Color;
   floatingPoint?: number;
 }
 
-export interface DepthTrackProps {
-  name: string;
-  height: number;
-  main: DepthCurve;
-  secondary?: DepthCurve;
+export interface GradientColor {
+  value: Color;
+  position: number;
 }
 
-export interface DepthHeaderProps {
-  height: number;
-  scope: number;
-  units: Units;
-  main: DepthCurve;
-  secondary?: DepthCurve;
+export type Gradient = GradientColor[];
+
+export interface Palette {
+  gradient?: Gradient;
+  domain?: Partial<Domain>;
+  scale?: Scale;
 }
+
+export interface Borders {
+  horizontal?: LineStyle;
+  vertical?: LineStyle;
+}
+
+export interface ModelValue {
+  x: number;
+  y: number;
+  alpha: number;
+  roUp: number;
+  roDown: number;
+}
+
+export type ModelData = ModelValue[];

@@ -43,6 +43,6 @@ export default [
   {
     input: 'src/index.ts',
     output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-    plugins: [alias({ entries: [{ find: 'types', replacement: '../../../types' }] }), dts()],
+    plugins: [alias({ entries: [{ find: 'types', replacement: '../../types' }] }), dts()],
   },
 ];

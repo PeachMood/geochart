@@ -6,7 +6,7 @@ export interface LogViewContext {
   width: number;
   height: number;
   orientation: Orientation;
-  domain: Required<Domain>;
+  domain: Domain;
   scope: number;
   units: Units;
   grid: VerticalGrid;
