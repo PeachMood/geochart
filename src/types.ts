@@ -26,10 +26,6 @@ export interface Point<X, Y> {
   y: Y;
 }
 
-export interface Vector extends Point<number, number> {
-  phi: number;
-}
-
 export interface Text {
   value?: string;
   color?: Color;
