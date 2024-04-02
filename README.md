@@ -1,8 +1,8 @@
-<h1 style="font-size: 2.5em"> 📊 Geochart </h1>
+📊 Geochart
 
-<p> Library for plotting graphs in the area of geonavigation</p>
+Library for plotting graphs in the area of geonavigation
 
-# 🛠️ Getting started
+## 🛠️ Getting started
 
 ## Prerequisites
 
@@ -41,7 +41,7 @@ cd react-example-project
 npm link geochart
 ```
 
-# ✨ Components
+## ✨ Components
 
 ## LogView
 
@@ -75,11 +75,11 @@ interface LogViewProps {
 
 - `orientation`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 - `units`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 - `domain`
 
@@ -166,7 +166,7 @@ interface CurveProps {
 
 - `isContinuous`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 ## DepthTrack
 
@@ -201,7 +201,7 @@ interface DepthTrackProps {
 
 - `secondary`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 ## ModelCurve
 
@@ -248,7 +248,7 @@ interface ModelCurveProps {
 
   Domain of model data. By default domain is set based on models data. See [Domain](#domain) for more details
 
-# 🎉 Types
+## 🎉 Types
 
 ## Domain
 
@@ -363,11 +363,11 @@ interface HorizontalGrid {
 
   - `leftOffset`
 
-    <span style="color:grey">Not implemented yet</span>
+    $\textcolor{grey}{\textsf{Not implemented yet}}$
 
   - `rightOffset`
 
-    <span style="color:grey">Not implemented yet</span>
+    $\textcolor{grey}{\textsf{Not implemented yet}}$
 
   - `isDisplayed`
 
@@ -399,7 +399,7 @@ interface LineStyle {
 
 - `type`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 ## DepthCurve
 
@@ -427,7 +427,7 @@ interface DepthCurve {
 
 - `floatingPoint`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 ## Palette
 
@@ -455,7 +455,7 @@ interface Palette {
 
 - `scale`
 
-  <span style="color:grey">Not implemented yet</span>
+  $\textcolor{grey}{\textsf{Not implemented yet}}$
 
 ## Gradient
 
@@ -535,7 +535,7 @@ type ModelData = ModelValue[];
 
   Electrical resistivity of the down layer. Specified in Om \* m
 
-# 📒 Usage
+## 📒 Usage
 
 ## Import
 
