@@ -2,7 +2,10 @@ import { type FC, type ReactNode } from 'react';
 
 export type Omit<T, K extends keyof T> = Pick<T, Exclude<keyof T, K>>;
 export type Component<T> = FC<T & { className?: string; children?: ReactNode }>;
-export type Comparator<T> = (a: T, b: T) => number;
+export type Comparator<T> = (first: T, second: T) => number;
+export type Predicate<T> = (value: T) => boolean;
+export type Accessor<T, S> = (value: T, index: number) => S;
+export type ColorScale = (value: any) => string;
 
 export type Scale = 'linear' | 'logarithmic';
 export type Orientation = 'horizontal' | 'vertical';
@@ -21,7 +24,9 @@ export type Depth = DepthValue[];
 export type CurveValue = Point<DepthValue, DataValue>;
 export type CurveData = CurveValue[];
 
-export interface Point<X, Y> {
+export type Coordinates = Point<number, number>;
+
+interface Point<X, Y> {
   x: X;
   y: Y;
 }
@@ -37,14 +42,14 @@ export interface Size {
 }
 
 export interface Domain {
-  min: number;
-  max: number;
+  min?: number;
+  max?: number;
 }
 
-export type Range<T = number> = T[];
+export type Range<T = number> = Array<T>;
 
 export interface Ticks {
-  domain: Domain;
+  domain: Required<Domain>;
   interval?: number;
   lines?: number;
 }
@@ -94,7 +99,7 @@ export type Gradient = GradientColor[];
 
 export interface Palette {
   gradient?: Gradient;
-  domain?: Partial<Domain>;
+  domain?: Domain;
   scale?: Scale;
 }
 
@@ -103,7 +108,7 @@ export interface Borders {
   vertical?: LineStyle;
 }
 
-export interface ModelValue {
+export interface Model {
   x: number;
   y: number;
   alpha: number;
@@ -111,4 +116,13 @@ export interface ModelValue {
   roDown: number;
 }
 
-export type ModelData = ModelValue[];
+export type MultiModel = Model[];
+
+export interface WellArea {
+  up: number[];
+  down: number[];
+  border: number[];
+  palette: number[];
+}
+
+export type TextAnchor = 'start' | 'middle' | 'end';

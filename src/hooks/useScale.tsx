@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { scaleLinear, scaleLog } from '@visx/scale';
 
-import { type Domain, type Scale, type Range } from 'types';
+import { type Range, type Scale, type Domain } from 'types';
 
 function scaleBuilder(scale: Scale) {
   switch (scale) {
@@ -12,12 +12,13 @@ function scaleBuilder(scale: Scale) {
   }
 }
 
-export default function useScale<T = number>(range: Range<T>, domain: Domain, scale: Scale = 'linear') {
+export default function useScale<Type = number>(range: Range<Type>, domain: Domain = {}, ticks: Array<number> = [], scale: Scale = 'linear') {
   const { min, max } = domain;
   const value = useMemo(() => {
     const scaleFunction = scaleBuilder(scale);
-    return scaleFunction({ range, domain: [min, max] });
-  }, [range, min, max, scale]);
+    const domain = min !== undefined && max !== undefined ? [min, max] : ticks;
+    return scaleFunction({ range, domain });
+  }, [range, min, max, ticks, scale]);
 
   return value;
 }
