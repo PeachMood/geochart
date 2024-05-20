@@ -20,7 +20,7 @@ import useKey from 'hooks/useKey';
 import useMap from 'hooks/useMap';
 import useGradient from 'hooks/useGradient';
 
-import { DEFAULT_BORDERS, DEFAULT_HEIGHT, DEFAULT_NAME, RANGE_START } from './constants';
+import { DEFAULT_BORDERS, DEFAULT_HEIGHT, DEFAULT_NAME, DEFAULT_POSITION, RANGE_START } from './constants';
 import { compareByPosition, getGradientColor, getPosition } from './utils';
 import styles from './ModelCurve.module.css';
 
@@ -42,9 +42,8 @@ export const ModelCurve: Component<Partial<ModelCurveProps>> = (props) => {
   const width = useScope(logView.domain, logView.scope);
   const depth = useTicks(logView.depth);
 
-  const scope = width / height;
   const multiModel = useSort<Model>(props?.data, compareByPosition);
-  const wellArea = useMultiModel(multiModel, logView.depth, scope);
+  const wellArea = useMultiModel(multiModel, logView.depth);
 
   const xRange = [RANGE_START, width];
   const xScale = useScale(xRange, logView.domain);
@@ -63,9 +62,9 @@ export const ModelCurve: Component<Partial<ModelCurveProps>> = (props) => {
   const x = useCallback((value: CurveValue) => xScale(value.x), [xScale]);
   const y = useCallback((value: CurveValue) => yScale(value.y ?? 0), [yScale]);
 
-  const value = useCurveTrack({ key, width, height, domain: yDomain });
+  const value = useCurveTrack({ key, width, height, domain: yDomain, position: DEFAULT_POSITION });
 
-  useGradientAxis(key, { key, gradient, domain, name, height });
+  useGradientAxis(key, { key, gradient, domain, name, height, position: DEFAULT_POSITION });
 
   return (
     <CurveTrackContext.Provider value={value}>

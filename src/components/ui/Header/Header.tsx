@@ -28,7 +28,7 @@ export const Header: Component<HeaderProps> = ({ children }) => {
           {Object.entries(store).map(([key, axes]) => (
             <li className={styles.item} key={key}>
               {axes.map((axis) => (
-                <Axis {...axis} key={axis.name || axis.key} />
+                <Axis {...axis} key={axis.key + axis.name} />
               ))}
             </li>
           ))}

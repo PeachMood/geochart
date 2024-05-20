@@ -15,8 +15,8 @@ function scaleBuilder(scale: Scale) {
 export default function useScale<Type = number>(range: Range<Type>, domain: Domain = {}, ticks: Array<number> = [], scale: Scale = 'linear') {
   const { min, max } = domain;
   const value = useMemo(() => {
-    const scaleFunction = scaleBuilder(scale);
     const domain = min !== undefined && max !== undefined ? [min, max] : ticks;
+    const scaleFunction = scaleBuilder(scale);
     return scaleFunction({ range, domain });
   }, [range, min, max, ticks, scale]);
 

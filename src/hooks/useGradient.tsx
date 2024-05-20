@@ -8,7 +8,7 @@ import useSort from 'hooks/useSort';
 import useScale from 'hooks/useScale';
 import useMap from 'hooks/useMap';
 
-const DEFAULT_SCALE: Scale = 'logarithmic';
+const DEFAULT_SCALE: Scale = 'linear';
 
 const DEFAULT_GRADIENT: Gradient = [
   { value: '#fbbb3b', position: 0 },

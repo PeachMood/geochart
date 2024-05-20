@@ -1,4 +1,4 @@
-import { type Data, type Domain } from 'types';
+import { DataValue, Scale, type Data, type Domain } from 'types';
 
 import { type ColumnDatum } from './MultiCurve';
 
@@ -6,13 +6,20 @@ export function isNotNull<T>(value: T): value is T {
   return value !== null;
 }
 
-export function createBin(data: Data[]): (value: number, index: number) => ColumnDatum {
-  return (_: number, index: number) => ({
-    bin: index,
+function fitInDomain(value: DataValue, domain: Required<Domain>, scale: Scale): DataValue {
+  if (value === null || scale === 'linear') {
+    return value;
+  }
+  return Math.max(value, domain.min);
+}
+
+export function createBin(data: Data[], domain: Required<Domain>, scale: Scale = 'linear'): (value: number, index: number) => ColumnDatum {
+  return (_: number, depth: number) => ({
+    bin: depth,
     bins:
-      data[index]?.map((count, bin) => ({
-        count,
-        bin,
+      data?.map((curve, index) => ({
+        count: fitInDomain(curve[depth], domain, scale),
+        bin: index,
       })) || [],
   });
 }

@@ -36,25 +36,25 @@ export interface MultiCurveProps {
 
 export const MultiCurve: Component<Partial<MultiCurveProps>> = (props) => {
   const { name = DEFAULT_NAME, isSmoothed = DEFAULT_SMOOTHING } = props;
-  const { indexes = {}, data = [] } = props;
+  const { indexes = {}, data = [], palette } = props;
 
   const key = useKey();
   const logView = useContext(LogViewContext);
   const curveTrack = useContext(CurveTrackContext);
 
   //TODO: Change gradient domain for indexes
-  const { gradient, domain, scale: colorScale } = useGradient(props.palette, data.flat(1));
+  const { gradient, domain, scale: colorScale } = useGradient(palette, data.flat(1));
 
   const xRange = [DEFAULT_MIN_VALUE, curveTrack.width];
   const xScale = useScale(xRange, logView.domain);
 
   const yRange = [curveTrack.height, DEFAULT_MIN_VALUE];
-  const yDomain = { min: indexes.min || DEFAULT_MIN_VALUE, max: indexes.max || data[0].length };
+  const yDomain = { min: indexes.min || DEFAULT_MIN_VALUE, max: indexes.max || data.length };
   const yScale = useScale(yRange, yDomain);
   const yTicks = { domain: yDomain, lines: 0 };
 
   const depth = useTicks(logView.depth);
-  const heatmap = useMap(depth, createBin(data));
+  const heatmap = useMap(depth, createBin(data, domain, palette?.scale));
 
   const binHeight = curveTrack.height / getBinCount(yDomain);
   const binWidth = curveTrack.width / depth.length;

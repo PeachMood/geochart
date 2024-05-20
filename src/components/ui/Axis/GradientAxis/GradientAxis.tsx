@@ -27,7 +27,7 @@ export const GradientAxis: Component<GradientAxisProps> = (props) => {
 
   return (
     <svg width={size.width} height={size.height}>
-      <LinearGradient id={id} gradient={gradient} orientation="vertical" />
+      <LinearGradient id={id} gradient={gradient} orientation="vertical" scale={scale} />
       <Rectangle id={id} coordinates={DEFAULT_COORDINATES} size={{ width: size.width / 2, height }} isFlipped={isFlipped(position)} />
       <NumericAxis
         key={key}
@@ -39,7 +39,7 @@ export const GradientAxis: Component<GradientAxisProps> = (props) => {
         position={gradientPosition}
         isHiddenLine
       />
-      {ticks && <NumericAxis key={key} scale={scale} height={height} ticks={ticks} position={position} color={DEFAULT_COLORS.DARK} isHiddenLabel />}
+      {ticks && <NumericAxis key={key} height={height} ticks={ticks} position={position} color={DEFAULT_COLORS.DARK} isHiddenLabel />}
     </svg>
   );
 };

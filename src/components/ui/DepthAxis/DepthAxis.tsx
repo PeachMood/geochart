@@ -27,7 +27,7 @@ export const DepthAxis: FC<DepthAxisProps> = (props) => {
   const mTicks = useTicks({ domain, interval });
   const sTicks = useTicks({ domain, interval, lines });
 
-  const top = position === 'top' ? size.height : TOP_PADDING;
+  const top = position === 'top' ? size.height - 1 : TOP_PADDING;
 
   return (
     <svg width={size.width} height={size.height}>
