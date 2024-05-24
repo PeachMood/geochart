@@ -1,3 +1,3 @@
-import { DEFAULT_AXIS } from 'components/ui/Axis/constants';
+export const DEFAULT_AXIS_WIDTH: number = 60;
 
-export const DEFAULT_AXIS_WIDTH = DEFAULT_AXIS.width;
+export const MIN_HEADER_WIDTH: number = 85;

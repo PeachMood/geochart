@@ -1,1 +1,2 @@
-export { default } from './CurveTrack';
+export { CurveTrack, type CurveTrackProps } from './CurveTrack';
+export { CurveTrack as default } from './CurveTrack';

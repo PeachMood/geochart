@@ -27,6 +27,10 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
+- Перенести ComponentProps к компонентам
+- Сделать рефакторинг constants и custom hooks
+- Изменить import из /components
+
 ### Deprecated
 
 ### Removed

@@ -1,5 +1,4 @@
 .axes {
-  overflow-x: scroll;
   display: flex;
   align-items: flex-end;
   border-right: 3px solid #e6e9ec;
@@ -9,8 +8,9 @@
   display: flex;
   flex-direction: column;
   justify-content: stretch;
+  overflow-x: scroll;
   background-color: #fff;
-  min-width: 60px;
+  min-width: 85px;
   margin: 0;
   padding: 0;
 }
@@ -18,6 +18,8 @@
 .item {
   display: flex;
   flex-direction: row;
+  /* gap: 5px; */
+  min-height: 160px;
   justify-content: flex-end;
   padding: 0;
   list-style: none;

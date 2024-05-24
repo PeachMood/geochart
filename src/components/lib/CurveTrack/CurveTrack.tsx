@@ -1,28 +1,37 @@
 import { useContext } from 'react';
 
-import { type Component, type CurveTrackProps } from 'types';
-import { HorizontalGrid, VerticalGrid } from 'components/ui';
+import { type Component, type HorizontalGrid as Grid, type Scale } from 'types';
+import HorizontalGrid from 'components/ui/HorizontalGrid';
+import VerticalGrid from 'components/ui/VerticalGrid';
 import LogViewContext from 'context/LogViewContext';
 import CurveTrackContext from 'context/CurveTrackContext';
-import useCurveTrack from 'hooks/context/useCurveTrack';
-import useKey from 'hooks/utils/useKey';
-import useScope from 'hooks/utils/useScope';
+import useCurveTrack from 'hooks/useCurveTrack';
+import useKey from 'hooks/useKey';
+import useScope from 'hooks/useScope';
 
 import { DEFAULT_HEIGHT, DEFAULT_SCALE, DEFAULT_HORIZONTAL_GRID } from './constants';
 import styles from './CurveTrack.module.css';
 
-const CurveTrack: Component<Partial<CurveTrackProps>> = ({ children, ...props }) => {
+export interface CurveTrackProps {
+  name: string;
+  height: number;
+  scale: Scale;
+  grid: Grid;
+}
+
+export const CurveTrack: Component<Partial<CurveTrackProps>> = ({ children, ...props }) => {
   const { height = DEFAULT_HEIGHT, scale = DEFAULT_SCALE, grid = DEFAULT_HORIZONTAL_GRID } = props;
 
   const logView = useContext(LogViewContext);
   const width = useScope(logView.domain, logView.scope);
   const key = useKey();
 
+  const position = 'bottom';
   const size = { width, height };
   const main = { style: logView.grid.main?.style, ...grid.main };
   const secondary = { style: logView.grid.secondary?.style, ...grid.secondary };
 
-  const curveTrack = useCurveTrack({ key, scale, ...size, ...main });
+  const curveTrack = useCurveTrack({ key, scale, position, ...size, ...main });
 
   return (
     <CurveTrackContext.Provider value={curveTrack}>
@@ -36,5 +45,3 @@ const CurveTrack: Component<Partial<CurveTrackProps>> = ({ children, ...props })
     </CurveTrackContext.Provider>
   );
 };
-
-export default CurveTrack;

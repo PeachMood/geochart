@@ -1,1 +1,2 @@
-export { default } from './DepthTrack';
+export { DepthTrack, type DepthTrackProps } from './DepthTrack';
+export { DepthTrack as default } from './DepthTrack';

@@ -1,18 +1,18 @@
 import { GridColumns } from '@visx/grid';
 
 import { type VerticalGrid as GridProps, type Domain, type Component, type Size } from 'types';
-import useScale from 'hooks/utils/useScale';
-import useTicks from 'hooks/utils/useTicks';
+import useScale from 'hooks/useScale';
+import useTicks from 'hooks/useTicks';
 
-import { DEFAULT_MAIN_GRID_INTERVAL, DEFAULT_SECONDARY_GRID_LINES } from './constants';
+import { DEFAULT_MAIN_GRID_INTERVAL, DEFAULT_SECONDARY_GRID_LINES, LEFT_OFFSET, RANGE_START } from './constants';
 
 export type VerticalGridProps = GridProps & {
   domain: Required<Domain>;
   size: Size;
 };
 
-const VerticalGrid: Component<VerticalGridProps> = ({ main, secondary, domain, size, children }) => {
-  const range = { start: 0, end: size.width };
+export const VerticalGrid: Component<VerticalGridProps> = ({ main, secondary, domain, size, children }) => {
+  const range = [RANGE_START, size.width];
   const scale = useScale(range, domain);
 
   const mInterval = main?.interval || DEFAULT_MAIN_GRID_INTERVAL;
@@ -24,6 +24,7 @@ const VerticalGrid: Component<VerticalGridProps> = ({ main, secondary, domain, s
   return (
     <svg width={size.width} height={size.height}>
       <GridColumns
+        offset={LEFT_OFFSET}
         scale={scale}
         width={size.width}
         height={size.height}
@@ -32,6 +33,7 @@ const VerticalGrid: Component<VerticalGridProps> = ({ main, secondary, domain, s
         tickValues={sTicks}
       />
       <GridColumns
+        offset={LEFT_OFFSET}
         scale={scale}
         width={size.width}
         height={size.height}
@@ -44,5 +46,3 @@ const VerticalGrid: Component<VerticalGridProps> = ({ main, secondary, domain, s
     </svg>
   );
 };
-
-export default VerticalGrid;

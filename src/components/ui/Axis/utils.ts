@@ -1,14 +1,16 @@
-import { type Color } from 'types';
+import { AxisProps as Axis, AxisType } from './Axis';
+import { GradientAxisProps as GradientAxis } from './GradientAxis';
+import { NumericAxisProps as NumericAxis } from './NumericAxis';
+import { PlaceholderProps as Placeholder } from './Placeholder';
 
-import { type AxisDefaults } from './Axis';
-import { TextAnchorType } from 'victory';
-
-export function tickLabelProps(axis: AxisDefaults, length: number, color?: Color) {
-  return (_: unknown, index?: number) => ({
-    fill: color,
-    textAnchor: (index === 0 ? 'start' : index === length - 1 ? 'end' : 'middle') as TextAnchorType,
-    ...axis.tickLabelProps,
-  });
+export function isNumericAxis(axis: Axis): axis is NumericAxis {
+  return axis.type === AxisType.Numeric;
 }
 
-//
+export function isGradientAxis(axis: Axis): axis is GradientAxis {
+  return axis.type === AxisType.Gradient;
+}
+
+export function isPlaceholder(axis: Axis): axis is Placeholder {
+  return axis.type === AxisType.Placeholder;
+}

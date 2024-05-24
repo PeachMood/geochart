@@ -1,4 +1,6 @@
-export { default as LogView } from './LogView';
-export { default as CurveTrack } from './CurveTrack';
-export { default as DepthTrack } from './DepthTrack';
-export { default as Curve } from './Curve';
+export { Curve } from './Curve';
+export { CurveTrack } from './CurveTrack';
+export { DepthTrack } from './DepthTrack';
+export { LogView } from './LogView';
+export { ModelCurve } from './ModelCurve';
+export { MultiCurve } from './MultiCurve';

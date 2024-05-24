@@ -1,14 +1,13 @@
 import { type Orientation, type Size, type Text } from 'types';
-
 import { type Depth } from './DepthHeader';
-
-export const getAdjustedSize = (width: number, height: number, orientation: Orientation): Size => {
-  return orientation === 'vertical' ? { width, height } : { width: height, height: width };
-};
 
 const createTextObject = (value?: string, color?: string): Text => ({ value, color });
 
-export const getDepthAxisText = (depth: Depth): Text[] => {
+export function getAdjustedSize(width: number, height: number, orientation: Orientation): Size {
+  return orientation === 'vertical' ? { width, height } : { width: height, height: width };
+}
+
+export function getDepthAxisText(depth: Depth): Text[] {
   const text = [
     createTextObject(depth.main.name, depth.main.color),
     createTextObject(`(${depth.units})`, depth.main.color),
@@ -20,8 +19,8 @@ export const getDepthAxisText = (depth: Depth): Text[] => {
   }
 
   return text;
-};
+}
 
-export const getPosition = (start: number, step: number, index: number): number => {
+export function getPosition(start: number, step: number, index: number): number {
   return start + index * step;
-};
+}

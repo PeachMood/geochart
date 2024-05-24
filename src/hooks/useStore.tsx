@@ -1,3 +1,4 @@
+import { type Predicate } from 'types';
 import { useCallback, useMemo, useState } from 'react';
 
 export type Store<V> = Record<string, V[]>;
@@ -38,26 +39,28 @@ export default function useStore<V>(property: keyof V, initialStore: Store<V> = 
     [store],
   );
 
+  const getItems = useCallback(
+    (key: string, predicate: Predicate<V>) => {
+      return store[key] ? store[key].filter(predicate) : [];
+    },
+    [store],
+  );
+
   const deleteItem = useCallback(
     (key: string, value: V) => {
       setStore((store) => {
         const copiedStore = { ...store };
         copiedStore[key] = deleteFromArray(store[key] || [], value, property);
+        if (copiedStore[key].length === 0) {
+          delete copiedStore[key];
+        }
         return copiedStore;
       });
     },
     [property],
   );
 
-  const value = useMemo(
-    () => ({
-      store,
-      setItem,
-      deleteItem,
-      getItem,
-    }),
-    [store, setItem, getItem, deleteItem],
-  );
+  const value = useMemo(() => ({ store, setItem, getItem, getItems, deleteItem }), [store, setItem, getItem, getItems, deleteItem]);
 
   return value;
 }

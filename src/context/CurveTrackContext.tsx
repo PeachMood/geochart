@@ -1,13 +1,15 @@
 import { createContext } from 'react';
 
-import { type Scale } from 'types';
+import { type Scale, type Position, Domain } from 'types';
 
 export interface CurveTrackContext {
   key: string;
   width: number;
   height: number;
-  scale: Scale;
+  scale?: Scale;
   lines?: number;
+  position?: Position;
+  domain?: Required<Domain>;
 }
 
 const CurveTrackContext = createContext<CurveTrackContext>({} as CurveTrackContext);

@@ -1,7 +1,7 @@
 import { useContext, useEffect } from 'react';
 
-import { type DepthHeaderProps as Depth } from 'types';
 import HeaderContext from 'context/HeaderContext';
+import { DepthHeaderProps as Depth } from 'components/ui/DepthHeader';
 
 export default function useDepthTrack(depth: Depth) {
   const header = useContext(HeaderContext);

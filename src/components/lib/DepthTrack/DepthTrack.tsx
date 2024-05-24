@@ -1,15 +1,22 @@
 import { useContext } from 'react';
 
-import { type Component, type DepthTrackProps } from 'types';
-import { DepthAxis } from 'components/ui';
+import { type Component, type DepthCurve } from 'types';
+import DepthAxis from 'components/ui/DepthAxis';
 import LogViewContext from 'context/LogViewContext';
-import useDepthTrack from 'hooks/context/useDepthTrack';
-import useScope from 'hooks/utils/useScope';
+import useDepthTrack from 'hooks/useDepthTrack';
+import useScope from 'hooks/useScope';
 
 import { DEFAULT_HEIGHT, DEFAULT_MAIN_DEPTH } from './constants';
 import styles from './DepthTrack.module.css';
 
-const DepthTrack: Component<Partial<DepthTrackProps>> = (props) => {
+export interface DepthTrackProps {
+  name: string;
+  height: number;
+  main: DepthCurve;
+  secondary: DepthCurve;
+}
+
+export const DepthTrack: Component<Partial<DepthTrackProps>> = (props) => {
   const { height = DEFAULT_HEIGHT, main = DEFAULT_MAIN_DEPTH, secondary } = props;
 
   const { domain, grid, scope, units } = useContext(LogViewContext);
@@ -28,5 +35,3 @@ const DepthTrack: Component<Partial<DepthTrackProps>> = (props) => {
     </section>
   );
 };
-
-export default DepthTrack;

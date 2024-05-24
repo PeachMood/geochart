@@ -6,6 +6,6 @@ export const DEFAULT_HEIGHT: number = 60;
 
 export const DEFAULT_MAIN_DEPTH: DepthCurve = {
   name: 'MD',
-  color: '#021D38',
+  color: '#5f302d',
   floatingPoint: 0,
 };

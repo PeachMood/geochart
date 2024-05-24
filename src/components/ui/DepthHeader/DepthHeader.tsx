@@ -1,23 +1,31 @@
 import { Text as VisxText } from '@visx/text';
 import classNames from 'classnames';
 
-import { type Component, type DepthHeaderProps } from 'types';
+import { type Component, type Units, type DepthCurve } from 'types';
 
-import { DEFAULT_DEPTH } from './constants';
+import { DEFAULT_DEPTH_HEADER } from './constants';
 import { getDepthAxisText, getPosition } from './utils';
 import styles from './DepthHeader.module.css';
 
-export interface DepthDefaults {
+export type Depth = DepthHeaderProps & DepthHeaderDefaults;
+
+export interface DepthHeaderProps {
+  height: number;
+  scope: number;
+  units: Units;
+  main: DepthCurve;
+  secondary?: DepthCurve;
+}
+
+export interface DepthHeaderDefaults {
   width: number;
   gap: number;
   y: number;
   x: string;
 }
 
-export type Depth = DepthDefaults & DepthHeaderProps;
-
-const DepthHeader: Component<DepthHeaderProps> = (props) => {
-  const depth = { ...DEFAULT_DEPTH, ...props };
+export const DepthHeader: Component<DepthHeaderProps> = (props) => {
+  const depth = { ...DEFAULT_DEPTH_HEADER, ...props };
   const text = getDepthAxisText(depth);
 
   return (
@@ -36,5 +44,3 @@ const DepthHeader: Component<DepthHeaderProps> = (props) => {
     </svg>
   );
 };
-
-export default DepthHeader;

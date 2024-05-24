@@ -2,7 +2,7 @@ import { type HorizontalGrid, type Scale } from 'types';
 
 export const DEFAULT_NAME: string = 'Трек';
 
-export const DEFAULT_HEIGHT: number = 180;
+export const DEFAULT_HEIGHT: number = 160;
 
 export const DEFAULT_SCALE: Scale = 'linear';
 

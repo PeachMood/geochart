@@ -1,6 +1,6 @@
 import { type Domain } from 'types';
 
-export const GRID_DOMAIN: Required<Domain> = { min: 1, max: 10 };
+export const DEFAULT_GRID_DOMAIN: Required<Domain> = { min: 1, max: 10 };
 
 export const RANGE_END: number = 0;
 

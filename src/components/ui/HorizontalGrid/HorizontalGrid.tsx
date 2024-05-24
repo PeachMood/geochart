@@ -1,12 +1,12 @@
-import { useContext, useEffect, useState } from 'react';
 import { GridRows } from '@visx/grid';
 
-import { type AxisProps as Axis, type Component, type HorizontalGrid as GridProps, type LineStyle, type Scale, type Size } from 'types';
-import HeaderContext from 'context/HeaderContext';
-import useScale from 'hooks/utils/useScale';
-import useTicks from 'hooks/utils/useTicks';
+import { type Component, type HorizontalGrid as GridProps, type LineStyle, type Scale, type Size } from 'types';
+import useFirstCurve from 'hooks/useFirstCurve';
+import useScale from 'hooks/useScale';
+import useTicks from 'hooks/useTicks';
 
-import { DEFAULT_MAIN_GRID_LINES, DEFAULT_SECONDARY_GRID_LINES, DEFAUL_MAIN_GRID_INTERVAL, GRID_DOMAIN, RANGE_END } from './constants';
+import { DEFAULT_MAIN_GRID_LINES, DEFAULT_SECONDARY_GRID_LINES, DEFAUL_MAIN_GRID_INTERVAL } from './constants';
+import { DEFAULT_GRID_DOMAIN, RANGE_END } from './constants';
 
 export type HorizontalGridProps = GridProps & {
   track: string;
@@ -16,13 +16,13 @@ export type HorizontalGridProps = GridProps & {
   size: Size;
 };
 
-const HorizontalGrid: Component<HorizontalGridProps> = ({ track: key, main, secondary, children, size, ...props }) => {
-  const axes = useContext(HeaderContext);
-  const [curve, setCurve] = useState<Axis>();
+export const HorizontalGrid: Component<HorizontalGridProps> = (props) => {
+  const { track: key, main, secondary, children, size } = props;
+  const curve = useFirstCurve(key);
 
-  const domain = curve?.ticks.domain || GRID_DOMAIN;
-  const range = { start: size.height, end: RANGE_END };
-  const scale = useScale(range, domain, props.scale);
+  const domain = curve?.ticks?.domain || DEFAULT_GRID_DOMAIN;
+  const range = [size.height, RANGE_END];
+  const scale = useScale(range, domain, undefined, props.scale);
 
   const mLines = main?.lines || DEFAULT_MAIN_GRID_LINES;
   const mTicks = useTicks({ domain, lines: mLines }, props.scale, 'main');
@@ -30,10 +30,6 @@ const HorizontalGrid: Component<HorizontalGridProps> = ({ track: key, main, seco
 
   const sLines = secondary?.lines || DEFAULT_SECONDARY_GRID_LINES;
   const sTicks = useTicks({ domain, interval: mInterval, lines: sLines }, props.scale, 'secondary');
-
-  useEffect(() => {
-    setCurve(axes.getCurveAxis(key, 0));
-  }, [key, axes]);
 
   return (
     <svg width={size.width} height={size.height}>
@@ -61,5 +57,3 @@ const HorizontalGrid: Component<HorizontalGridProps> = ({ track: key, main, seco
     </svg>
   );
 };
-
-export default HorizontalGrid;

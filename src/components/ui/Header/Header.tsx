@@ -1,43 +1,37 @@
 import { useMemo } from 'react';
 
-import { type Component, type AxisProps, type DepthHeaderProps as Depth } from 'types';
+import { type Component } from 'types';
+import { Axis, type AxisProps } from 'components/ui/Axis';
+import { DepthHeader, type DepthHeaderProps } from 'components/ui/DepthHeader';
 import HeaderContext from 'context/HeaderContext';
-import Axis from 'components/ui/Axis';
-import DepthHeader from 'components/ui/DepthHeader';
-import useHeader from 'hooks/context/useHeader';
-import useStore from 'hooks/store/useStore';
-import useValue from 'hooks/store/useValue';
+import useHeader from 'hooks/useHeader';
+import useStore from 'hooks/useStore';
+import useValue from 'hooks/useValue';
 
-import { DEFAULT_AXIS_WIDTH } from './constants';
+import { getMaxWidth } from './utils';
 import styles from './Header.module.css';
 
-export type HeaderProps = object;
+export type HeaderProps = Record<string, unknown>;
 
-const Header: Component<HeaderProps> = ({ children }) => {
+export const Header: Component<HeaderProps> = ({ children }) => {
   const axes = useStore<AxisProps>('name');
-  const { store, setItem: setCurveAxis, getItem: getCurveAxis, deleteItem: deleteCurveAxis } = axes;
-  const { value: depth, setValue: setDepth, deleteValue: deleteDepth } = useValue<Depth>();
-  const header = useHeader({ setDepth, deleteDepth, getCurveAxis, setCurveAxis, deleteCurveAxis });
+  const { value: depth, setValue: setDepth, deleteValue: deleteDepth } = useValue<DepthHeaderProps>();
+  const { store, setItem: setAxis, getItem: getAxis, getItems: getAxes, deleteItem: deleteAxis } = axes;
 
-  const width = useMemo(() => {
-    const values = Object.values(store);
-    return Math.max(...values.map((array) => array.length)) * DEFAULT_AXIS_WIDTH;
-  }, [store]);
+  const header = useHeader({ setDepth, deleteDepth, setAxis, getAxis, getAxes, deleteAxis });
+  const width = useMemo(() => getMaxWidth(store), [store]);
 
   return (
     <HeaderContext.Provider value={header}>
-      <header className={styles.axes} style={{ minWidth: width + 'px' }}>
+      <header className={styles.axes} style={{ minWidth: `${width}px` }}>
         <ul className={styles.list}>
-          {Object.entries(store).map(
-            ([key, axes]) =>
-              axes && (
-                <li className={styles.item} key={key}>
-                  {axes.map((axis) => (
-                    <Axis {...axis} key={axis.name} />
-                  ))}
-                </li>
-              ),
-          )}
+          {Object.entries(store).map(([key, axes]) => (
+            <li className={styles.item} key={key}>
+              {axes.map((axis) => (
+                <Axis {...axis} key={axis.key + axis.name} />
+              ))}
+            </li>
+          ))}
           {depth && (
             <li className={styles.depth}>
               <DepthHeader {...depth} />
@@ -49,5 +43,3 @@ const Header: Component<HeaderProps> = ({ children }) => {
     </HeaderContext.Provider>
   );
 };
-
-export default Header;
