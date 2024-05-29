@@ -248,6 +248,46 @@ interface ModelCurveProps {
 
   Domain of model data. By default domain is set based on models data. See [Domain](#domain) for more details
 
+## MultiCurve
+
+Сhart for displaying azimuth logging
+
+![MultiCurve](/assets/MultiCurve.png)
+
+### Interface
+
+```TypeScript
+export interface MultiCurveProps {
+  name: string;
+  isSmoothed: boolean;
+  palette: Palette;
+  indexes: Domain;
+  data: Data[];
+}
+```
+
+### Properies
+
+- `name`
+
+  Name of the [MultiCurve](#multicurve) component
+
+- `isSmoothed`
+
+  Defines the smoothing of an array of curves. Options: to smooth or not
+
+- `palette`
+
+  Gradient for defining the color of curve values. See [Palette](#palette) for more details
+
+- `indexes`
+
+  Defines the range of zones from which measurements were made. See [Domain](#domain) for more details
+
+- `data`
+
+  A two-dimensional array of azimuth logging curves. Each internal array corresponds to a separate curve
+
 ## 🎉 Types
 
 ## Domain
